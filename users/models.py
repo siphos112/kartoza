@@ -1,7 +1,7 @@
 from enum import unique
+from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import User
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 
@@ -13,7 +13,6 @@ class UserProfile(models.Model):
 	updated = models.DateTimeField(auto_now=True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	
-	telephone_number = PhoneNumberField(unique=True, null=True, blank=True)
 	address = models.CharField(verbose_name="Street Address",max_length=100, null=True, blank=True)
 	complex_building = models.CharField(verbose_name="Complex/Building", max_length=100, null=True, blank=True)
 	suburb = models.CharField(verbose_name="Suburb", max_length=100, null=True, blank=True)

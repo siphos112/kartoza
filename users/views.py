@@ -91,7 +91,7 @@ def usersmap(request):
             user['latitude'] = profile[0]['latitude']
             user['longitude'] = profile[0]['longitude']
             user['post_code'] = profile[0]['post_code']
-        allusers.append(user)
+            allusers.append(user)
     context = {
         'key':key,
         'userlist':allusers,

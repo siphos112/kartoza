@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import UserProfile
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 class UserForm(UserCreationForm):
@@ -53,7 +52,6 @@ class UserProfileForm(forms.ModelForm):
 	Basic model-form for our user profile that extends Django user model.
 	
 	'''
-	telephone_number = PhoneNumberField(unique=True, null=False, blank=True)
 	address = forms.CharField(max_length=100, required=True, widget = forms.HiddenInput())
 	complex_building = forms.CharField(max_length=100, required=False, widget = forms.HiddenInput())
 	suburb = forms.CharField(max_length=100, required=False, widget = forms.HiddenInput())
@@ -67,5 +65,5 @@ class UserProfileForm(forms.ModelForm):
 
 	class Meta:
 		model = UserProfile
-		fields = ('telephone_number', 'address', 'complex_building', 'suburb', 
+		fields = ('address', 'complex_building', 'suburb', 
 		'town', 'province', 'post_code', 'country', 'longitude', 'latitude')

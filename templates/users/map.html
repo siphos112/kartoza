@@ -5,7 +5,7 @@
 {% block extend_head %}
 <style>
     #map-users{
-        height:400px;
+        height:700px;
         width:100%;
     }
 </style>
@@ -26,7 +26,6 @@
     function initMap(){
         data = "{{userlist|safe}}";
         data = data.slice(1, -1);
-        console.log(data)
         var arrData = data.split('}, ');
         var options = {
             zoom: 7,
@@ -40,18 +39,18 @@
             var pos2 = splitdata[7].split(':')
             var firstname = splitdata[2].split(':')
             var lastname = splitdata[3].split(':')
-            firstname = firstname[1].trim()
-            lastname = lastname[1].trim()
-            var fullname = firstname.concat(" ", lastname)
+            firstname = firstname[1].trim().slice(1,-1)
+            lastname = lastname[1].trim().slice(1,-1)
+            let fullname = '<b>'+ firstname.concat(" ", lastname) + '</b>'
 
             //Address
             var address = splitdata[4].split(':')
             var town = splitdata[5].split(':')
             var postcode = splitdata[8].split(':')
-            address = address[1].trim()
-            town = town[1].trim()
-            postcode = postcode[1].trim()
-            let address_string = address.concat("\n",town)
+            address = address[1].trim().slice(1,-1)
+            town = town[1].trim().slice(1,-1)
+            postcode = postcode[1].trim().slice(1,-1)
+            let address_string = address.concat(", ",town)
             address_string = address_string.concat("<br>", postcode)
             
             //Add address to full name
