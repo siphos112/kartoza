@@ -171,6 +171,7 @@ def sign_out(request):
     '''
     Basic view for user sign out
     '''
+    if request.user.is_anonymous == False:
+        LogoutActivity.objects.create(user=request.user)
     logout(request)
-    LogoutActivity.objects.create(user=request.user)
     return redirect(reverse('users:sign-in'))
