@@ -3,7 +3,12 @@
 
 
 {% block extend_head %}
-
+<style>
+    #map-users{
+        height:400px;
+        width:100%;
+    }
+</style>
 {% endblock %}
 
 
@@ -17,5 +22,67 @@
 {% endblock %}
 
 {% block extend_footer %}
+<script>
+    function initMap(){
+        data = "{{userlist|safe}}";
+        data = data.slice(1, -1);
+        console.log(data)
+        var arrData = data.split('}, ');
+        var options = {
+            zoom: 7,
+            center: {lat:-30.559482, lng:22.937505999999985}
+        }    
+        var map = new google.maps.Map(document.getElementById('map-users'), options);           
+        // Add marker
+        for (var i=0; i < arrData.length; i++){
+            var splitdata = arrData[i].split(',');
+            var pos1 = splitdata[6].split(':')
+            var pos2 = splitdata[7].split(':')
+            var firstname = splitdata[2].split(':')
+            var lastname = splitdata[3].split(':')
+            firstname = firstname[1].trim()
+            lastname = lastname[1].trim()
+            var fullname = firstname.concat(" ", lastname)
+
+            //Address
+            var address = splitdata[4].split(':')
+            var town = splitdata[5].split(':')
+            var postcode = splitdata[8].split(':')
+            address = address[1].trim()
+            town = town[1].trim()
+            postcode = postcode[1].trim()
+            let address_string = address.concat("\n",town)
+            address_string = address_string.concat("<br>", postcode)
+            
+            //Add address to full name
+            fullname = fullname.concat("<br>", address_string)
+            var lat = pos1[1].trim()
+            var lg = pos2[1].trim()
+            var lat_num = parseFloat(lat.slice(1,-1));
+            var lg_num = parseFloat(lg.slice(1,-1));
+            addMarker({coords:{lat:lat_num, lng:lg_num}, content:fullname});
+        }
+        // Array of markers
+        function addMarker(props){
+            var marker = new google.maps.Marker({
+                position:props.coords,
+                map:map,
+            });
+            if (props.content){
+                var infoWindow = new google.maps.InfoWindow({
+                    content:props.content
+                });
+                marker.addListener('click', function(){
+                    infoWindow.open(map, marker)
+                });
+                
+            }
+        }    
+    }
+</script>
+
+<script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap">
+</script>
 
 {% endblock %}

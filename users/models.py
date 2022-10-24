@@ -31,3 +31,18 @@ class UserProfile(models.Model):
 
 	def __str__(self):
 		return f'{self.user}'
+
+
+class LoginActivity(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.user) + " logged in on " + str(self.date)
+
+class LogoutActivity(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.user) + " logged out on " + str(self.date)

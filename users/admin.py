@@ -1,3 +1,6 @@
 from django.contrib import admin
+from . models import LogoutActivity, LoginActivity
 
-# Register your models here.
+
+admin.site.register(LoginActivity)
+admin.site.register(LogoutActivity)
