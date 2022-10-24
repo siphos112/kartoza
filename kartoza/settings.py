@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +140,11 @@ RECAPTCHA_PRIVATE_KEY = "6Le85JAiAAAAAHN9kJFilI9WONhHONgiS447IakL"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Setup redirect urls
+LOGIN_URL = "users:sign-in"
+LOGIN_REDIRECT_URL = "users:account"
+LOGOUT_REDIRECT_URL = "users:sign-in"
 
 # Set base country as South Africa for this project's map
 BASE_COUNTRY = "ZA"
