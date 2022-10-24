@@ -53,7 +53,7 @@ class UserProfileForm(forms.ModelForm):
 	Basic model-form for our user profile that extends Django user model.
 	
 	'''
-	telephone_number = PhoneNumberField(unique=True, null=False, blank=True, widget = forms.TextInput)
+	telephone_number = PhoneNumberField(unique=True, null=False, blank=True)
 	address = forms.CharField(max_length=100, required=True, widget = forms.HiddenInput())
 	complex_building = forms.CharField(max_length=100, required=False, widget = forms.HiddenInput())
 	suburb = forms.CharField(max_length=100, required=False, widget = forms.HiddenInput())
