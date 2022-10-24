@@ -75,7 +75,28 @@ def profile_view(request):
 
 
 def usersmap(request):
-	pass
+    '''
+    Map view for users to be displayed on the map
+    '''
+    key = settings.GOOGLE_API_KEY
+    allusers = []
+    users = User.objects.exclude(is_superuser=True).values('id', 'username', 'first_name', 'last_name')
+    for user in users:
+        id = user['id']
+        profile = UserProfile.objects.filter(user_id=id).values('has_profile', 'address',
+        'town', 'latitude', 'longitude', 'post_code')
+        if profile[0]['has_profile']:
+            user['address'] = profile[0]['address']
+            user['town'] = profile[0]['town']
+            user['latitude'] = profile[0]['latitude']
+            user['longitude'] = profile[0]['longitude']
+            user['post_code'] = profile[0]['post_code']
+        allusers.append(user)
+    context = {
+        'key':key,
+        'userlist':allusers,
+    }
+    return render(request, 'users/map.html', context)
 
 
 class SignUpView(AjaxFormMixin, FormView):
