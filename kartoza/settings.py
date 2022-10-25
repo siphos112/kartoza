@@ -132,11 +132,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 # Google Api keys to be removed on github after assessment is done
 
 
-GOOGLE_API_KEY = "AIzaSyDyx98mtd7vn5wGCY7tODlQM7vDnMsWw44"
+GOOGLE_API_KEY = " "
 
-RECAPTCHA_PUBLIC_KEY = "6Le85JAiAAAAAAN-MiFEv7irgBFtuLLknAcxOus5"
+RECAPTCHA_PUBLIC_KEY = ""
 
-RECAPTCHA_PRIVATE_KEY = "6Le85JAiAAAAAHN9kJFilI9WONhHONgiS447IakL"
+RECAPTCHA_PRIVATE_KEY = ""
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
