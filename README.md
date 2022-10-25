@@ -10,8 +10,11 @@ to register users, create profiles and locate them on a map.
 5. Clone repository to this directory[in step 4]
 6. run: pip install -r requirements.txt
 7. The settings.py file requires the following Google API keys for the app to work:
+
     GOOGLE_API_KEY = ""
+    
     RECAPTCHA_PUBLIC_KEY = ""
+    
     RECAPTCHA_PRIVATE_KEY = ""
         
 8. run: python manage.py makemigrations
